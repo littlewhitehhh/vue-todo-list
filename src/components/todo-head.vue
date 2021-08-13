@@ -1,12 +1,25 @@
 <template>
   <div class="todo-head">
-    <input type="text" placeholder="请输入你的任务名称，按回车键确认">
+    <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="task" @keyup.enter="handleTask">
   </div>
 </template>
 
 <script>
 export default {
   name:'todo-head',
+  data() {
+    return {
+      task:''
+    }
+  },
+  methods: {
+    handleTask(){
+      // console.log(this.task);
+      // 向app传递数据
+      this.$emit('addTask',this.task)
+      this.task = ''
+    }
+  },
 }
 </script>
 

@@ -1,21 +1,47 @@
 <template>
   <div class="todo-foot">
     <div class="left">
-      <input type="checkbox">
+      <input type="checkbox" @change='checkAll' :checked='isAll'>
     </div>
     <div class="center">
-      已完成0/全部4
+      已完成{{done}}/全部{{allTask}}
     </div>
     <div class="right">
       
-      <input type="button" value="清除已完成任务" class="delete btn">
+      <input type="button" value="清除已完成任务" class="delete btn" @click="clearDone">
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name:'todo-foot'
+  name:'todo-foot',
+  props:['taskLists'],
+  computed:{
+    allTask(){
+       return this.taskLists.length
+    },
+    done(){
+      return this.taskLists.filter(item=>{
+        return item.isChecked == true
+      }).length
+    },
+    isAll(){
+        return this.allTask == this.done && this.allTask>0
+    }
+  },
+  methods: {
+    // 全选
+    checkAll(e){
+      console.log('我要开始全选了');
+      this.$emit('checkAllTodo',e.target.checked)
+    },
+    // 清除
+    clearDone(){
+      this.$emit('clearDoneTodo')
+    }
+  },
+
 }
 </script>
 
