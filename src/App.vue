@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-    <todo-head :taskLists="taskLists" @addTask = 'addTask'></todo-head>
-    <todo-body :taskLists="taskLists" @checkTask = 'checkTodo' @editTask = 'editTodo' @deleteTask='deleteTodo'></todo-body>
-    <todo-foot :taskLists="taskLists" @checkAllTodo = 'checkAllTodo' @clearDoneTodo='clearDoneTodo'></todo-foot>
+    <!-- <todo-head :taskLists="taskLists" @addTask = 'addTask'></todo-head> -->
+    <todo-head></todo-head>
+    <!-- <todo-body :taskLists="taskLists" @checkTask = 'checkTodo' @editTask = 'editTodo' @deleteTask='deleteTodo'></todo-body> -->
+    <todo-body></todo-body>
+    <!-- <todo-foot :taskLists="taskLists" @checkAllTodo = 'checkAllTodo' @clearDoneTodo='clearDoneTodo'></todo-foot> -->
+    <todo-foot></todo-foot>
+
+    
+   <!--  <todo-body></todo-body>
+    <todo-foot></todo-foot> -->
   </div>
 </template>
 
@@ -21,11 +28,15 @@ export default {
   },
   data() {
     return {
-      taskLists: JSON.parse(localStorage.getItem('taskLists')) || [],
+      /* taskLists: JSON.parse(localStorage.getItem('taskLists')) || [], */
     }
   },
-  
-  methods: {
+  computed:{
+    taskLists(){
+      return this.$store.state.taskLists
+    }
+  },
+  /* methods: {
     // 添加任务
     addTask(task){
       // console.log(data);
@@ -74,7 +85,7 @@ export default {
       })
     }
   },
-  
+   */
   watch:{
     // 监听taskList的变化 并保存在localStorage中
      taskLists:{

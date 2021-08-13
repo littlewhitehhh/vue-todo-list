@@ -14,10 +14,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name:'todo-foot',
-  props:['taskLists'],
+  // props:['taskLists']
   computed:{
+    ...mapState(['taskLists']),
     allTask(){
        return this.taskLists.length
     },
@@ -28,17 +30,24 @@ export default {
     },
     isAll(){
         return this.allTask == this.done && this.allTask>0
-    }
+    },
+    
   },
   methods: {
     // 全选
     checkAll(e){
-      console.log('我要开始全选了');
+      /* console.log('我要开始全选了');
       this.$emit('checkAllTodo',e.target.checked)
+ */
+      // 使用vuex
+      this.$store.commit('checkAllTodo',e.target.checked)
     },
     // 清除
     clearDone(){
-      this.$emit('clearDoneTodo')
+      // this.$emit('clearDoneTodo')
+
+      // 使用vuex
+      this.$store.commit('claerDoneTodo')
     }
   },
 

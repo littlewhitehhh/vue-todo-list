@@ -16,7 +16,11 @@ export default {
     handleTask(){
       // console.log(this.task);
       // 向app传递数据
-      this.$emit('addTask',this.task)
+      /* this.$emit('addTask',this.task)
+      this.task = '' */
+
+      // 使用vuex状态管路
+      this.$store.commit('addTask',this.task)
       this.task = ''
     }
   },

@@ -19,6 +19,8 @@
 </template>
 
 <script>
+// import {mapState} from 'vuex'
+
 export default {
   name:'listItem',
   props:{
@@ -32,13 +34,19 @@ export default {
       isShow:false
     }
   },
+  computed:{
+    
+  },
   methods: {
     // 勾选已经完成的任务
     changeCheck(id){
-      console.log('修改了');
+      // console.log('修改了');
       // console.log(id);
       // console.log(this.$refs.checkbox.checked);
-      this.$emit('checkChangeById', id)
+      // this.$emit('checkChangeById', id)
+
+      // 使用vuex管理
+      this.$store.commit('changeCheck',id)
     },
     // 显示编辑框
     showEdit(){
@@ -47,14 +55,21 @@ export default {
     // 编辑任务
     
     edit(e,id){
-      console.log('我要开始装杯了' ,id);
+      // console.log('我要开始装杯了' ,id);
       // console.log(e.target.value);
-      this.$emit('editById',e.target.value, id)
+      /* this.$emit('editById',e.target.value, id)
+      this.isShow = false */
+      // 使用vuex
+      console.log(id);
+      this.$store.commit('editTask',[e.target.value,id])
       this.isShow = false
     },
     todelete(id){
-      console.log('我要删除了',id);
+      /* console.log('我要删除了',id);
       this.$emit('deleteById', id)
+ */
+      // 使用vuex 
+      this.$store.commit('deleteTodo',id)    
     }
     
   },

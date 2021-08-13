@@ -1,13 +1,12 @@
 <template>
   <div class="todo-body">
    <list-item
-              
                v-for="(item) in taskLists"
                :key="item.id"
-              :listItem="item" 
-              @checkChangeById='changeToAPP' 
+              :listItem="item" >
+              <!-- @checkChangeById='changeToAPP' 
                @editById='editToApp'
-               @deleteById='deleteToApp'>
+               @deleteById='deleteToApp' -->
     </list-item>
    <!-- <list-item></list-item>
    <list-item></list-item>
@@ -17,24 +16,30 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 import listItem from './listItem.vue'
 export default {
   name:'todo-body',
   components:{
     listItem,
   },
-  props:{
+  // 没用vuex
+  /* props:{
     taskLists:{
       type:Array,
       default:[]
     }
-  },
+  }, */
   data() {
     return {
-      id:0,
+     
     }
   },
-  methods: {
+  computed:{
+    ...mapState(['taskLists'])
+  },
+  /* methods: {
     changeToAPP(id){
       console.log(id);
       this.$emit('checkTask',id)
@@ -47,7 +52,7 @@ export default {
       console.log('我要向app传递删除的人了',id);
       this.$emit('deleteTask',id)
     }
-  },
+  }, */
 }
 </script>
 
