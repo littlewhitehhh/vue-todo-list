@@ -21,24 +21,10 @@ export default {
   },
   data() {
     return {
-      taskLists:[
-        {
-          id:1,
-          isChecked:false,
-          task:'吃饭'
-        },
-        {
-          id:2,
-          isChecked:true,
-          task:'打豆豆'
-        },{
-          id:3,
-          isChecked:false,
-          task:'睡觉'
-        }
-      ]
+      taskLists: JSON.parse(localStorage.getItem('taskLists')) || [],
     }
   },
+  
   methods: {
     // 添加任务
     addTask(task){
@@ -88,15 +74,18 @@ export default {
       })
     }
   },
-  /* watch:{
-    taskLists:{
+  
+  watch:{
+    // 监听taskList的变化 并保存在localStorage中
+     taskLists:{
+      immediate:true,
       deep:true,
-      handle(value){
-        window.localStorage.setItem('taskLists',JSON.stringify(value))
-        console.log(value);
+      handler(newValue,oldValue){
+        window.localStorage.setItem('taskLists', JSON.stringify(newValue))
       }
     }
-  } */
+  }
+  
 }
 </script>
 
